@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -11,58 +11,70 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+} */
+
+
+/* 
+  The :root selector is similar to html only with higher specificity.
+*/
+:root {
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+/* BOX RULES */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* STATIC LAYOUT */
+body {
+  height: 100vh;
+  padding: 0 5px;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+#root {
+  width: 550px;
+}
+#quote-box {
+  border: 1px solid dimgray;
+  border-radius: 3px;
+  padding: 40px 50px;
+  text-align: center;
+}
+#quote-box {
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+}
+#author {
+  text-align: right;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* DEVICE-WIDTH QUERIES */
+@media (max-width: 550px) {
+  #root {
+    width: 100%;
+  }
+  #quote-box {
+    padding: 40px 5vw;
+  }
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+
+/* TYPOGRAPHY */
+#quote-box {
+  font-family: raleway, sans-serif;
+}
+#text {
+  font-size: 1.7em;
+}
+#author {
   font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+#tweet-quote,
+#new-quote {
+  font-size: 0.85em;
 }

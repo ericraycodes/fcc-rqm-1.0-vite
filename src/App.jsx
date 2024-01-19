@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchRandomQuote } from './functionality.jsx';
+import { fetchRandomQuote } from './functions.jsx';
 
 function App() {
 
@@ -31,6 +31,7 @@ function App() {
   const handleClick = () => {
     setClick(true);
     setClicked(clicked + 1);
+    window.console.log('<App/> cleanup...')
   };
 
   // Tweet path for tweet functionality
