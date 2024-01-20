@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { fetchRandomQuote } from './functions.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
+import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
 function App() {
 
@@ -22,16 +25,19 @@ function App() {
 
     // cleanup function
     return () => {
-      setQuote({});
+      window.console.log('<App/> cleanup...');
       setClick(false);
+      setTimeout(() => {
+        setQuote({});
+      }, 700);
     };
   }, [click]);
 
   // Handle click event
   const handleClick = () => {
+    window.console.log('Button clicked');
     setClick(true);
     setClicked(clicked + 1);
-    window.console.log('<App/> cleanup...')
   };
 
   // Tweet path for tweet functionality
@@ -43,20 +49,28 @@ function App() {
   return (
     <>
     <div id='quote-box'>
-      <blockquote id='text'>{quote['quote']}</blockquote>
+      <blockquote id='text'>
+        <FontAwesomeIcon
+          className='fa-icon-quote'
+          icon={faQuoteLeft}
+        />
+        <span>{quote['quote']}</span>
+      </blockquote>
       <span id='author'>- {quote['author']}</span>
-      <a
-        id='tweet-quote'
-        title='Tweet this quote!'
-        href={href}
-        target='_blank'
-        rel='noreferrer'
-      >X</a>
-      <button
-        id='new-quote'
-        title='Click for a new quote!'
-        onClick={handleClick}
-      >New quote</button>
+      <div className='buttons-box'>
+        <a
+          id='tweet-quote'
+          title='Tweet this quote!'
+          href={href}
+          target='_blank'
+          rel='noreferrer'
+        ><FontAwesomeIcon icon={faXTwitter} /></a>
+        <button
+          id='new-quote'
+          title='Click for a new quote!'
+          onClick={handleClick}
+        >New quote</button>
+      </div>
     </div>
     </>
   );

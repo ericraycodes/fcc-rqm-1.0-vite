@@ -26,47 +26,64 @@
   padding: 0;
   box-sizing: border-box;
 }
-/* STATIC LAYOUT */
+
+/* RESPONSIVE LAYOUT */
 body {
   height: 100vh;
   padding: 0 5px;
   display: flex;
-  flex-flow: column;
   justify-content: center;
   align-items: center;
-}
-#root {
-  width: 550px;
-}
-#quote-box {
-  border: 1px solid dimgray;
-  border-radius: 3px;
-  padding: 40px 50px;
-  text-align: center;
 }
 #quote-box {
   display: flex;
   flex-flow: column;
   gap: 20px;
 }
+.buttons-box {
+  display: flex;
+  flex-flow: row;
+  gap: 12px;
+  justify-content: right;
+  align-items: center;
+}
+
+/* STATIC STYLES */
+#root {
+  width: 550px;
+  min-width: 240px;
+}
+#quote-box {
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 40px 50px;
+  text-align: center;
+}
+.fa-icon-quote {
+  vertical-align: bottom;
+  margin-right: 12px;
+}
 #author {
   text-align: right;
 }
-
-/* DEVICE-WIDTH QUERIES */
-@media (max-width: 550px) {
-  #root {
-    width: 100%;
-  }
-  #quote-box {
-    padding: 40px 5vw;
-  }
+#tweet-quote,
+#new-quote {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
 }
-
+footer {
+    margin: 10px 0 40px;
+    padding: 5px 0;
+    text-align: center;
+ }
 
 /* TYPOGRAPHY */
 #quote-box {
   font-family: raleway, sans-serif;
+}
+.fa-icon-quote {
+  font-size: 1.2em;
 }
 #text {
   font-size: 1.7em;
@@ -77,4 +94,75 @@ body {
 #tweet-quote,
 #new-quote {
   font-size: 0.85em;
+}
+footer {
+    font-family: sans-serif;
+    font-size: 0.7em;
+ }
+
+/* COLOR */
+body {
+  background-color: gray;
+}
+#quote-box {
+  background-color: white;
+  color: gray;
+}
+#tweet-quote,
+#new-quote {
+  background-color: gray;
+  color: white;
+}
+footer {
+  color: white;
+}
+
+/* DEVICE-WIDTH QUERIES */
+@media screen and (max-width: 550px) {
+  #root {
+    width: 100%;
+  }
+  .buttons-box {
+    justify-content: space-between;
+  }
+  #quote-box {
+    padding: 10vw 5vw;
+  }
+}
+@media screen and (max-width: 350px) {
+  #quote-box {
+    font-size: 80%;
+  }
+  #author {
+    text-align: center;
+  }
+  .buttons-box {
+    flex-flow: column;
+    gap: 7px;
+  }
+  #tweet-quote,
+  #new-quote {
+    font-size: 80%;
+    height: 25px;
+    width: 90%;
+    padding: unset;
+    padding: 7px 0;
+  }
+}
+
+/* BUTTON HOVER */
+#tweet-quote:hover,
+#new-quote:hover {
+  opacity: 80%;
+  cursor: pointer;
+}
+
+/* OPACITY & COLOR TRANSITION */
+body,
+#tweet-quote,
+#new-quote {
+  transition: background-color 0.7s ease-in;
+}
+.quote-author-box {
+  transition: opacity 0.7s ease-in;
 }
