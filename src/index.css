@@ -54,7 +54,6 @@ body {
   min-width: 240px;
 }
 #quote-box {
-  border: 1px solid;
   border-radius: 3px;
   padding: 40px 50px;
   text-align: center;
@@ -161,8 +160,9 @@ footer {
 body,
 #tweet-quote,
 #new-quote {
-  transition: background-color 0.7s ease-in;
+  transition: background-color 0.7s ease-out;
 }
-.quote-author-box {
+#text,
+#author {
   transition: opacity 0.7s ease-in;
 }

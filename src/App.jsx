@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { fetchRandomQuote } from './functions.jsx';
+import { useState, useEffect, useRef } from 'react';
+import { fetchRandomQuote, selectRandomColor } from './functions.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
 import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
@@ -10,16 +10,21 @@ function App() {
   const [quote, setQuote] = useState({});
   // Toggle the state of button click event
   const [click, setClick] = useState(false);
-  // Counts nth click - this is not important, will be removed when done developing
-  const [clicked, setClicked] = useState(0);
+  // State of opacity of certain components
+  const [fade, setFade] = useState(false);
+  // State of random app color changes
+  const [color, setColor] = useState('gray');
 
   // Handle asynchronous random quote fetching at page load.
   useEffect(() => {
-    window.console.log('<App />', clicked);
+    window.console.log('<App />');
+    setFade(true);
     setTimeout(async () => {
       window.console.log('async op: fetching...')
       const fetchedQuote = await fetchRandomQuote();
       setQuote(fetchedQuote);
+      setColor(selectRandomColor());
+      setFade(false);
     }, 700);
     window.console.log('quote:', quote);
 
@@ -29,6 +34,7 @@ function App() {
       setClick(false);
       setTimeout(() => {
         setQuote({});
+        // setFade(false);
       }, 700);
     };
   }, [click]);
@@ -37,7 +43,6 @@ function App() {
   const handleClick = () => {
     window.console.log('Button clicked');
     setClick(true);
-    setClicked(clicked + 1);
   };
 
   // Tweet path for tweet functionality
@@ -46,29 +51,50 @@ function App() {
   const href = encodeURI(uri);
   window.console.log('tweet href:', href);
 
+  // Styles: reactive fade on quote and author texts
+  const styleFade = {
+    opacity : fade?'0%':'100%',
+    color : color
+  };
+  // Styles: reactive color transition on app color changes
+  const styleColor = {
+    backgroundColor: color
+  };
+  document.querySelector('body').style.backgroundColor = color;
+
   return (
     <>
     <div id='quote-box'>
-      <blockquote id='text'>
+      <blockquote
+        id='text'
+        style={styleFade}
+      >
         <FontAwesomeIcon
           className='fa-icon-quote'
           icon={faQuoteLeft}
         />
         <span>{quote['quote']}</span>
       </blockquote>
-      <span id='author'>- {quote['author']}</span>
-      <div className='buttons-box'>
+      <span
+        id='author'
+        style={styleFade}
+      >- {quote['author']}</span>
+      <div
+        className='buttons-box'
+      >
         <a
           id='tweet-quote'
           title='Tweet this quote!'
           href={href}
           target='_blank'
           rel='noreferrer'
+          style={styleColor}
         ><FontAwesomeIcon icon={faXTwitter} /></a>
         <button
           id='new-quote'
           title='Click for a new quote!'
           onClick={handleClick}
+          style={styleColor}
         >New quote</button>
       </div>
     </div>
