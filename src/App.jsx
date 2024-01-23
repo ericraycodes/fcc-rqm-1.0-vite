@@ -7,9 +7,9 @@ import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 function App() {
 
   // Manage the state of the quote
-  const [quote, setQuote] = useState({});
+  const [quote, setQuote] = useState({ quote: '', author: '' });
   // Toggle the state of button click event
-  const [click, setClick] = useState(false);
+  const [click, setClick] = useState(0);
   // State of opacity of certain components
   const [fade, setFade] = useState(false);
   // State of random app color changes: initial 'gray'
@@ -17,25 +17,20 @@ function App() {
 
   // Handle asynchronous random quote fetching at page load.
   useEffect(() => {
-    window.console.log('<App />');
+    window.console.log('<App /> render:', click + 1);
     setFade(true);
     setTimeout(async () => {
-      window.console.log('async op: fetching...')
+      // window.console.log('async op: fetching...')
       const fetchedQuote = await fetchRandomQuote();
       setQuote(fetchedQuote);
       setColor(selectRandomColor());
       setFade(false);
     }, 700);
-    window.console.log('quote:', quote);
-    window.console.log('color', color);
 
     // cleanup function
     return () => {
-      window.console.log('<App/> cleanup...');
-      setClick(false);
-      setTimeout(() => {
-        // setQuote({});
-  
+      window.console.log('<App/> cleanup:', click + 1);
+      setTimeout(() => {  
       }, 700);
     };
   }, [click]);
@@ -43,7 +38,7 @@ function App() {
   // Handle click event
   const handleClick = () => {
     window.console.log('Button clicked');
-    setClick(true);
+    setClick(click + 1);
   };
 
   // Tweet path for tweet functionality

@@ -8,24 +8,26 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 
-### GitHub pages + Vite
+# GitHub pages + Vite
 *To start, a repo is made, and development files are pushed.*
 
 - First, install gh-pages:
 	`npm i --save-dev gh-pages`
 
 - Second, update vite.config.js. Add a base-URL (repo-name) as property-value within the defineConfig({}):
-	`base: "/fcc-rqm-1.0-vite`
+	`base: "/fcc-rqm-1.0-vite"`
 
 - Third, update package.json with a "homepage" property:
 	`"homepage": "https://{user-name}/github.io/{repo-name}/"`
 
-- Fourth, add two prop "script" properties in the package.json file:
-	`"scripts": {
+- Fourth, add two prop "script" properties in the package.json file. The 'dist' in the "deploy" property-value is the build-output folder:
+	```
+	"scripts": {
 		"predeploy": "npm run build",
 		"deploy": "gh-pages -d dist",
 		...
-	}`
+	}
+	```
 
 - Fifth, deploy the app:
 	`npm run deploy`

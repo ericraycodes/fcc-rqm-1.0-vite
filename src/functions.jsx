@@ -5,6 +5,7 @@ const generateRandomNumber = (max) => Math.floor(Math.random() * max);
 // Fetches a random quote+author from './public/quotes.json'.
 const fetchRandomQuote = async () => {
     window.console.log('fetching a random quote + author...');
+    // return await fetch('./fcc-rqm-1.0-vite/quotes.json').catch(error => console.log('fetch error', error))
     return await fetch('./quotes.json').catch(error => console.log('fetch error', error))
         .then(response => response.json()).catch(error => console.log('json error', error))
         .then(data => {
