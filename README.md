@@ -10,15 +10,16 @@ Currently, two official plugins are available:
 
 ### FontAwesome + React
 
-*First, install the core package, to make the icons work*
+	*First, install the core package, to make the icons work*
 	`npm i --save @fortawesome/fontawesome-svg-core`
 
-*Second, install the icon packages, for the selection of free icons:*
-	```npm
-	npm i --save @fortawesome/free-solid-svg-icons
-	npm i --save @fortawesome/free-regular-svg-icons
-	npm i --save @fortawesome/free-brands-svg-icons
+	*Second, install the icon packages, for the selection of free icons:*
+	```node
+	npm i --save
+	@fortawesome/free-solid-svg-icons
+	@fortawesome/free-regular-svg-icons
+	@fortawesome/free-brands-svg-icons
 	```
 
-*Last, install the Font Awesome react component:*
+	*Last, install the Font Awesome react component:*
 	`npm i --save @fortawesome/react-fontawesome@latest`
