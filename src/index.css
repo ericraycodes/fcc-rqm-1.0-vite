@@ -32,6 +32,7 @@ body {
   height: 100vh;
   padding: 0 5px;
   display: flex;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
 }
@@ -101,7 +102,7 @@ footer {
 
 /* COLOR */
 body {
-  background-color: gray;
+  background-color: #3D3B40;
 }
 #quote-box {
   background-color: white;

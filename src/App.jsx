@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchRandomQuote, selectRandomColor } from './functions.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
@@ -12,8 +12,8 @@ function App() {
   const [click, setClick] = useState(false);
   // State of opacity of certain components
   const [fade, setFade] = useState(false);
-  // State of random app color changes
-  const [color, setColor] = useState('gray');
+  // State of random app color changes: initial 'gray'
+  const [color, setColor] = useState('#3D3B40');
 
   // Handle asynchronous random quote fetching at page load.
   useEffect(() => {
@@ -27,14 +27,15 @@ function App() {
       setFade(false);
     }, 700);
     window.console.log('quote:', quote);
+    window.console.log('color', color);
 
     // cleanup function
     return () => {
       window.console.log('<App/> cleanup...');
       setClick(false);
       setTimeout(() => {
-        setQuote({});
-        // setFade(false);
+        // setQuote({});
+  
       }, 700);
     };
   }, [click]);
