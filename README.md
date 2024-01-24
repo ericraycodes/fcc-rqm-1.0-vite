@@ -8,19 +8,23 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 
-# GitHub pages + Vite
-*To start, a repo is made, and development files are pushed.*
+# Deploy to GitHub pages: Vite + config
+Development on your local machine or chosen environment must complete first.
 
-- First, install gh-pages:
-	`npm i --save-dev gh-pages`
+The *"preview"* script can (or should) be used to preview the development's build-output locally.  When app runs to requirement, proceed to steps below for deployment.
 
-- Second, update vite.config.js. Add a base-URL (repo-name) as property-value within the defineConfig({}):
-	`base: "/fcc-rqm-1.0-vite"`
+To deploy, a github *repository* must be made already, and development files are pushed into.
 
-- Third, update package.json with a "homepage" property:
-	`"homepage": "https://{user-name}/github.io/{repo-name}/"`
+- First, install **gh-pages**:
+	```npm i --save-dev gh-pages```
 
-- Fourth, add two prop "script" properties in the package.json file. The 'dist' in the "deploy" property-value is the build-output folder:
+- Second, update *vite.config.js* file.  Add a base-URL (repo-name) as property-value within the **defineConfig({})**:
+	```base: "/{repo-name}/"```
+
+- Third, update *package.json* file with a *"homepage"* property:
+	```"homepage": "https://{user-name}/github.io/{repo-name}/"```
+
+- Fourth, add two *"script"* properties in the *package.json* file. The *'dist'* in the *"deploy"* property-value is the build-output folder:
 	```
 	"scripts": {
 		"predeploy": "npm run build",
@@ -30,11 +34,12 @@ Currently, two official plugins are available:
 	```
 
 - Fifth, deploy the app:
-	`npm run deploy`
+	```npm run deploy```
 
-- Last, on GitHub, go to the repo Settings. Set the Build and deployment 'Source' to 'Deploy from a branch'. Set the 'Branch' to 'gh-pages' and '/(root)'. Click 'Save'.
+- Last, on your GitHub repository, go **Settings**. Go to **Pages**.  Under **Build and deployment**: set the **Source** to *Deploy from a branch*; set the **Branch** to *gh-pages* and */(root)*. Click **Save**.
 
 ### FontAwesome + React
+Run the commands on the terminal:
 
 	# First, install the core package, to make the icons work
 	npm i --save @fortawesome/fontawesome-svg-core

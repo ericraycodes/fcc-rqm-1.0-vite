@@ -12,7 +12,7 @@ function App() {
   const [click, setClick] = useState(0);
   // State of opacity of certain components
   const [fade, setFade] = useState(false);
-  // State of random app color changes: initial 'gray'
+  // State of random app color changes
   const [color, setColor] = useState('#3D3B40');
 
   // Handle asynchronous random quote fetching at page load.
@@ -30,8 +30,6 @@ function App() {
     // cleanup function
     return () => {
       window.console.log('<App/> cleanup:', click + 1);
-      setTimeout(() => {  
-      }, 700);
     };
   }, [click]);
 
