@@ -1,3 +1,14 @@
+# The Developer
+
+	The example project is used as a template, hence, the similarity. I might have looked into its HTML structure on devtools. However, I would not say I purposefully copied anything, except: the font-style, and the href attribute (URI encoding, I did not know how to initially do this) of the <a> link element.
+  
+    This is kept to mostly a single-component app only. The <Footer /> is rendered only once.
+
+ 	The reason is to keep the code simple. Breaking it into multiple components might have to cost more on complexity. The parent component will have to re-render because of state sharing across different elements.
+ 
+ 	The window.console.log() is used because Vite does not run on devtools the console.log().
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

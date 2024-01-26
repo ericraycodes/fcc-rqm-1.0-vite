@@ -1,3 +1,19 @@
+/**
+ *   The example project is used as a template, hence, the similarity. I might have
+ * looked into its the HTML structure on devtools. However, I would not say I purposefully
+ * copied anything, except: the font-style, and the href attribute (URI encoding, I did not
+ * know how to initially do this) of the <a> link element.
+ * 
+ *   This is kept to mostly a single-component app only. The <Footer /> is rendered
+ * only once.
+ * 
+ *  The reason is to keep the code simple. Breaking it into multiple components might
+ * have to cost more on complexity. The parent component will have to re-render because
+ * of state sharing across different elements.
+ * 
+ * The window.console.log() is used because Vite does not run on devtools the console.log().
+ */
+
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
@@ -31,7 +47,7 @@ export default function App() {
 
     // cleanup function
     return () => {
-      window.console.log('<App /> UNMOUNT.\n<App /> CLEANUP');
+      window.console.log('<App /> UNMOUNT\n<App /> CLEANUP');
       setClicked(false);
     };
   }, [clicked]);
@@ -39,7 +55,7 @@ export default function App() {
 
   // Handle #new-quote click event
   const handleClick = () => {
-    window.console.log('Button clicked');
+    window.console.log('USER: button clicked');
     setClicked(true);
   };
 
@@ -51,38 +67,25 @@ export default function App() {
   const href = encodeURI(uri);
   window.console.log('tweet href:', href);
 
-  // For inline-styles: fade on quote and author texts.
+  // For inline-styles: fade on quote and author texts, color property.
   const styleFade = {
     opacity : fade?'0%':'100%',
     color : color
   };
   // For inline-styles: app color changes.
-  const styleColor = {
-    backgroundColor: color
-  };
+  const styleColor = { backgroundColor: color };
   // For changing the app's background-color. The element is outside of React.
   document.querySelector('body').style.backgroundColor = color;
 
   return (
     <>
     <div id='quote-box'>
-      <blockquote
-        id='text'
-        style={styleFade}
-      >
-        <FontAwesomeIcon
-          className='fa-icon-quote'
-          icon={faQuoteLeft}
-        />
+      <blockquote id='text' style={styleFade}>
+        <FontAwesomeIcon className='fa-icon-quote' icon={faQuoteLeft} />
         <span>{quote['quote']}</span>
       </blockquote>
-      <span
-        id='author'
-        style={styleFade}
-      >- {quote['author']}</span>
-      <div
-        className='buttons-box'
-      >
+      <span id='author' style={styleFade}>- {quote['author']}</span>
+      <div className='buttons-box'>
         <a
           id='tweet-quote'
           title='Tweet this quote!'
