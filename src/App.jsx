@@ -1,43 +1,49 @@
 import { useState, useEffect } from 'react';
-import { fetchRandomQuote, selectRandomColor } from './functions.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
 import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
-function App() {
+export default function App() {
 
-  // Manage the state of the quote
-  const [quote, setQuote] = useState({ quote: '', author: '' });
-  // Toggle the state of button click event
-  const [click, setClick] = useState(0);
-  // State of opacity of certain components
+  // Stores the random quote.
+  const [quote, setQuote] = useState({});
+  // Stores true when #new-quote button is clicked.
+  const [clicked, setClicked] = useState(false);
+  // When this is boolean true, the displayed quote will have fade out.
   const [fade, setFade] = useState(false);
-  // State of random app color changes
-  const [color, setColor] = useState('#3D3B40');
+  // Stores the random color.
+  const [color, setColor] = useState('gray');
 
-  // Handle asynchronous random quote fetching at page load.
+
+  // Handle asynchronous random quote fetching at page load & user event button click.
   useEffect(() => {
-    window.console.log('<App /> render:', click + 1);
+    window.console.log('<App /> RENDERED');
     setFade(true);
+
+    // The setTimeout() portion is used for timing the css fades with asynchronous fectching of quote.
     setTimeout(async () => {
-      // window.console.log('async op: fetching...')
-      const fetchedQuote = await fetchRandomQuote();
+      const fetchedQuote = await utils.fetchQuote();
       setQuote(fetchedQuote);
-      setColor(selectRandomColor());
+      setColor(utils.selectColor());
       setFade(false);
     }, 700);
+    window.console.log('quote:', quote);
 
     // cleanup function
     return () => {
-      window.console.log('<App/> cleanup:', click + 1);
+      window.console.log('<App /> UNMOUNT.\n<App /> CLEANUP');
+      setClicked(false);
     };
-  }, [click]);
+  }, [clicked]);
 
-  // Handle click event
+
+  // Handle #new-quote click event
   const handleClick = () => {
     window.console.log('Button clicked');
-    setClick(click + 1);
+    setClicked(true);
   };
+
+
 
   // Tweet path for tweet functionality
   const tweetPath = 'https://twitter.com/intent/tweet?hashtags=quotes,freeCodeCamp&related=freeCodeCamp&text=';
@@ -45,15 +51,16 @@ function App() {
   const href = encodeURI(uri);
   window.console.log('tweet href:', href);
 
-  // Styles: reactive fade on quote and author texts
+  // For inline-styles: fade on quote and author texts.
   const styleFade = {
     opacity : fade?'0%':'100%',
     color : color
   };
-  // Styles: reactive color transition on app color changes
+  // For inline-styles: app color changes.
   const styleColor = {
     backgroundColor: color
   };
+  // For changing the app's background-color. The element is outside of React.
   document.querySelector('body').style.backgroundColor = color;
 
   return (
@@ -96,4 +103,30 @@ function App() {
   );
 }
 
-export default App;
+
+// This function generates a random number between zero to a certain positive maximum number.
+const generateRandomNumber = (max) => Math.floor(Math.random() * max);
+
+// An object that contains methods: for fetching random quotes, and selecting random colors.
+const utils = {
+    'fetchQuote' : async () => {
+        window.console.log('\tfetching a random quote...');
+        return await fetch('./quotes.json').catch(error => console.log('fetch error', error))
+        .then(response => response.json()).catch(error => console.log('json error', error))
+        .then(data => {
+            const quotes = data['quotes'];
+            const randomQuote = quotes[generateRandomNumber(quotes.length)];
+            window.console.log('fetched:', randomQuote);
+            return randomQuote;
+        }).catch(error => console.log('data error', error));
+    },
+    'selectColor' : () => {
+        // random color options.
+        const colors = [
+            '#711DB0', '#1640D6', '#3081D0', '#332941', '#164863',
+            '#994D1C', '#B06161', '#A25772', '#FF5B22', '#43766C',
+            '#820300', '#AF2655', '#CD5C08', '#26577C', '#B8621B'
+        ];
+        return colors[generateRandomNumber(colors.length)];
+    }
+};

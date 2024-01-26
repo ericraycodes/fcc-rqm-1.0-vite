@@ -17,8 +17,8 @@
 /* 
   The :root selector is similar to html only with higher specificity.
 */
-:root {
-}
+
+/*@import url(https://fonts.googleapis.com/css2?family=Raleway&display=swap);*/
 
 /* BOX RULES */
 * {
@@ -144,7 +144,7 @@ footer {
   #new-quote {
     font-size: 80%;
     height: 25px;
-    width: 90%;
+    width: 100%;
     padding: unset;
     padding: 7px 0;
   }

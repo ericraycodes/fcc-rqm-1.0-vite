@@ -13,7 +13,7 @@ Development on your local machine or chosen environment must complete first.
 
 The *"preview"* script can (or should) be used to preview the development's build-output locally.  When app runs to requirement, proceed to steps below for deployment.
 
-To deploy, a github *repository* must be made already, and development files are pushed into.
+To deploy, a github *repository* must be made already, and development files are pushed into.  It can be not necessary to push these changes to the repo.
 
 - First, install **gh-pages**:
 	```npm i --save-dev gh-pages```
@@ -38,7 +38,7 @@ To deploy, a github *repository* must be made already, and development files are
 
 - Last, on your GitHub repository, go **Settings**. Go to **Pages**.  Under **Build and deployment**: set the **Source** to *Deploy from a branch*; set the **Branch** to *gh-pages* and */(root)*. Click **Save**.
 
-### FontAwesome + React
+# FontAwesome + React
 Run the commands on the terminal:
 
 	# First, install the core package, to make the icons work
@@ -51,3 +51,12 @@ Run the commands on the terminal:
 
 	#Last, install the Font Awesome react component:
 	npm i --save @fortawesome/react-fontawesome@latest
+
+### Performance related
+
+- robust component render
+- the use of axios?
+- aceesibility: color selection.
+- Mobile and desktop responsiveness.
+- useMemo, useCallback hooks
+- github new branch to address these issues.
