@@ -1,12 +1,14 @@
 # The Developer
 
-	The example project is used as a template, hence, the similarity. I might have looked into its HTML structure on devtools. However, I would not say I purposefully copied anything, except: the font-style, and the href attribute (URI encoding, I did not know how to initially do this) of the <a> link element.
-  
-    This is kept to mostly a single-component app only. The <Footer /> is rendered only once.
+This is my first proper React project.
 
- 	The reason is to keep the code simple. Breaking it into multiple components might have to cost more on complexity. The parent component will have to re-render because of state sharing across different elements.
+This freeCodeCamp project's [example app](https://random-quote-machine.freecodecamp.rocks/) was used as a template, hence, the similarity. I might have looked into its HTML structure on devtools. However, I would not say I purposefully copied anything, except: the font-style, the href attribute (URI encoding, I did not know how to initially do this) of the <a> link element, and/or a little or more ideas I might have took.
+  
+This project is kept to mostly a single-component app only. This is because the <Footer /> component is rendered only once - on page load.
+
+My goal is to keep the code simple. I did not break it into multiple components. This might have to cost more on complexity - because the parent component will have to re-render anyway due to state management across different levels of child elements.
  
- 	The window.console.log() is used because Vite does not run on devtools the console.log().
+The window.console.log() is used because Vite does not run the console.log() on devtools.
 
 
 # React + Vite
@@ -27,10 +29,10 @@ The *"preview"* script can (or should) be used to preview the development's buil
 To deploy, a github *repository* must be made already, and development files are pushed into.  It can be not necessary to push these changes to the repo.
 
 - First, install **gh-pages**:
-	```npm i --save-dev gh-pages```
+	`npm i --save-dev gh-pages`
 
 - Second, update *vite.config.js* file.  Add a base-URL (repo-name) as property-value within the **defineConfig({})**:
-	```base: "/{repo-name}/"```
+	`base: "/{repo-name}/"`
 
 - Third, update *package.json* file with a *"homepage"* property:
 	```"homepage": "https://{user-name}/github.io/{repo-name}/"```
@@ -45,29 +47,33 @@ To deploy, a github *repository* must be made already, and development files are
 	```
 
 - Fifth, deploy the app:
-	```npm run deploy```
+	`npm run deploy`
 
 - Last, on your GitHub repository, go **Settings**. Go to **Pages**.  Under **Build and deployment**: set the **Source** to *Deploy from a branch*; set the **Branch** to *gh-pages* and */(root)*. Click **Save**.
 
 # FontAwesome + React
-Run the commands on the terminal:
+Set up fontawesome with React. [click here](https://fontawesome.com/docs/web/use-with/react/).
 
-	# First, install the core package, to make the icons work
+Step 1: Ran the commands on the terminal:
+
+	# First, installed the core package, to make the icons work
 	npm i --save @fortawesome/fontawesome-svg-core
 
-	# Second, install the icon packages, for the selection of free icons:
+	# Second, installed the icon packages, for the selection of free icons:
 	npm i --save @fortawesome/free-solid-svg-icons
 	npm i --save @fortawesome/free-regular-svg-icons
 	npm i --save @fortawesome/free-brands-svg-icons
 
-	#Last, install the Font Awesome react component:
+	#Last, installed the Font Awesome react component:
 	npm i --save @fortawesome/react-fontawesome@latest
 
-### Performance related
+Step 2: Searched for free icons from fontawesome [here](https://fontawesome.com/search).
 
-- robust component render
-- the use of axios?
-- aceesibility: color selection.
-- Mobile and desktop responsiveness.
-- useMemo, useCallback hooks
-- github new branch to address these issues.
+Step 3: Added a fontawesome icon on React.js individually:
+
+	// Import statement
+	import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+	import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+
+	// Integrate the icon on JSX
+	<FontAwesomeIcon icon={faEnvelope} />
