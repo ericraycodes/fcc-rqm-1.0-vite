@@ -22,6 +22,14 @@ body {
   flex-flow: column;
   gap: 20px;
 }
+#quote-box > main {
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+}
+#text > p {
+  display: inline;
+}
 .buttons-box {
   display: flex;
   flex-flow: row;

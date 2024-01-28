@@ -1,20 +1,5 @@
-/**
- *   The example project is used as a template, hence, the similarity. I might have
- * looked into its the HTML structure on devtools. However, I would not say I purposefully
- * copied anything, except: the font-style, and the href attribute (URI encoding, I did not
- * know how to initially do this) of the <a> link element.
- * 
- *   This is kept to mostly a single-component app only. The <Footer /> is rendered
- * only once.
- * 
- *  The reason is to keep the code simple. Breaking it into multiple components might
- * have to cost more on complexity. The parent component will have to re-render because
- * of state sharing across different elements.
- * 
- * The window.console.log() is used because Vite does not run on devtools the console.log().
- */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
 import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
@@ -24,11 +9,13 @@ export default function App() {
   // Stores the random quote.
   const [quote, setQuote] = useState({});
   // Stores true when #new-quote button is clicked.
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(0);
   // When this is boolean true, the displayed quote will have fade out.
   const [fade, setFade] = useState(false);
   // Stores the random color.
   const [color, setColor] = useState('gray');
+
+  // const mainRef = useRef(null);
 
 
   // Handle asynchronous random quote fetching at page load & user event button click.
@@ -42,13 +29,12 @@ export default function App() {
       setQuote(fetchedQuote);
       setColor(utils.selectColor());
       setFade(false);
+      document.querySelector('body').focus();
     }, 700);
-    window.console.log('quote:', quote);
-
+    
     // cleanup function
     return () => {
       window.console.log('<App /> UNMOUNT\n<App /> CLEANUP');
-      setClicked(false);
     };
   }, [clicked]);
 
@@ -56,7 +42,7 @@ export default function App() {
   // Handle #new-quote click event
   const handleClick = () => {
     window.console.log('USER: button clicked');
-    setClicked(true);
+    setClicked(clicked + 1); 
   };
 
 
@@ -77,18 +63,33 @@ export default function App() {
   // For changing the app's background-color. The element is outside of React.
   document.querySelector('body').style.backgroundColor = color;
 
+  /**
+   * work on accessibility.
+   * auto focus on #quote-box
+   * tabbable on #quote-box, #text, and #author
+   */
   return (
     <>
     <div id='quote-box'>
-      <blockquote id='text' style={styleFade}>
-        <FontAwesomeIcon className='fa-icon-quote' icon={faQuoteLeft} />
-        <span>{quote['quote']}</span>
-      </blockquote>
-      <span id='author' style={styleFade}>- {quote['author']}</span>
-      <div className='buttons-box'>
+      {/**
+       *  The aria-live='assertive' is used for screen readers to read the updated content.
+       *  The aria-atomic='true' is used for screen readers to read the entire content
+       * of the <main> element when updated.
+       */}
+      <main
+        tabIndex='1'
+      >
+        <blockquote id='text' style={styleFade}> 
+          <FontAwesomeIcon className='fa-icon-quote' icon={faQuoteLeft} />
+          <p>{quote['quote']}</p>
+        </blockquote>
+        <p id='author' style={styleFade} aria-label={quote['author']+'.'}>- {quote['author']}</p>
+      </main>
+      <nav className='buttons-box'>
         <a
           id='tweet-quote'
-          title='Tweet this quote!'
+          aria-label='Click link to tweet this quote!'
+          title='Tweet this quote'
           href={href}
           target='_blank'
           rel='noreferrer'
@@ -96,12 +97,13 @@ export default function App() {
         ><FontAwesomeIcon icon={faXTwitter} /></a>
         <button
           id='new-quote'
+          aria-label='Click button for a new quote!'
           title='Click for a new quote!'
           onClick={handleClick}
           style={styleColor}
         >New quote</button>
-      </div>
-    </div>
+      </nav>
+    </div >
     </>
   );
 }
