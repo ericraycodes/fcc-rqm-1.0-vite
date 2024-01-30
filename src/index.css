@@ -93,7 +93,8 @@ footer {
 body {
   background-color: #3D3B40;
 }
-#quote-box {
+#quote-box,
+main {
   background-color: white;
   color: gray;
 }
@@ -139,7 +140,14 @@ footer {
   }
 }
 
-/* BUTTON HOVER */
+/* DECORATION */
+:focus-visible {
+  outline: none;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
 #tweet-quote:hover,
 #new-quote:hover {
   opacity: 80%;
@@ -155,9 +163,4 @@ body,
 #text,
 #author {
   transition: opacity 0.7s ease-in;
-}
-
-/* FOCUS */
-:focus-visible {
-  outline: none;
 }
