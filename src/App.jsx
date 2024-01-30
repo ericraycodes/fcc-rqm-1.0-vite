@@ -63,21 +63,14 @@ export default function App() {
   // For changing the app's background-color. The element is outside of React.
   document.querySelector('body').style.backgroundColor = color;
 
-  /**
-   * work on accessibility.
-   * auto focus on #quote-box
-   * tabbable on #quote-box, #text, and #author
-   */
+ 
   return (
     <>
     <div id='quote-box'>
-      {/**
-       *  The aria-live='assertive' is used for screen readers to read the updated content.
-       *  The aria-atomic='true' is used for screen readers to read the entire content
-       * of the <main> element when updated.
-       */}
       <main
         tabIndex='1'
+        aria-live='polite'
+        aria-atomic='true'
       >
         <blockquote id='text' style={styleFade}> 
           <FontAwesomeIcon className='fa-icon-quote' icon={faQuoteLeft} />
@@ -85,7 +78,7 @@ export default function App() {
         </blockquote>
         <p id='author' style={styleFade} aria-label={quote['author']+'.'}>- {quote['author']}</p>
       </main>
-      <nav className='buttons-box'>
+      <div className='buttons-box'>
         <a
           id='tweet-quote'
           aria-label='Click link to tweet this quote!'
@@ -102,7 +95,7 @@ export default function App() {
           onClick={handleClick}
           style={styleColor}
         >New quote</button>
-      </nav>
+      </div>
     </div >
     </>
   );
@@ -114,24 +107,29 @@ const generateRandomNumber = (max) => Math.floor(Math.random() * max);
 
 // An object that contains methods: for fetching random quotes, and selecting random colors.
 const utils = {
-    'fetchQuote' : async () => {
-        window.console.log('\tfetching a random quote...');
-        return await fetch('./quotes.json').catch(error => console.log('fetch error', error))
-        .then(response => response.json()).catch(error => console.log('json error', error))
-        .then(data => {
-            const quotes = data['quotes'];
-            const randomQuote = quotes[generateRandomNumber(quotes.length)];
-            window.console.log('fetched:', randomQuote);
-            return randomQuote;
-        }).catch(error => console.log('data error', error));
-    },
-    'selectColor' : () => {
-        // random color options.
-        const colors = [
-            '#711DB0', '#1640D6', '#3081D0', '#332941', '#164863',
-            '#994D1C', '#B06161', '#A25772', '#FF5B22', '#43766C',
-            '#820300', '#AF2655', '#CD5C08', '#26577C', '#B8621B'
-        ];
-        return colors[generateRandomNumber(colors.length)];
-    }
+
+  // 'random' : (max) => {return Math.floor(Math.random() * max)},
+
+  'fetchQuote' : async () => {
+    window.console.log('\tfetching a random quote...');
+    return await fetch('./quotes.json').catch(error => console.log('fetch error', error))
+      .then(response => response.json()).catch(error => console.log('json error', error))
+      .then(data => {
+          const quotes = data['quotes'];
+          const randomQuote = quotes[generateRandomNumber(quotes.length)];
+          window.console.log('fetched:', randomQuote);
+          return randomQuote;
+      }).catch(error => console.log('data error', error));
+  },
+
+  'selectColor' : () => {
+    // random color options.
+    const colors = [
+      '#711DB0', '#1640D6', '#3081D0', '#332941', '#164863',
+      '#994D1C', '#B06161', '#A25772', '#FF5B22', '#43766C',
+      '#820300', '#AF2655', '#CD5C08', '#26577C', '#B8621B'
+    ];
+    return colors[generateRandomNumber(colors.length)];
+  }
+
 };

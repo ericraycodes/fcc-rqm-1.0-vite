@@ -22,23 +22,29 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 
-# Deploy to GitHub pages: Vite + config
+# Deploy to GitHub pages with Vite config
 Development on your local machine or chosen environment must complete first.
 
 The *"preview"* script can (or should) be used to preview the development's build-output locally.  When app runs to requirement, proceed to steps below for deployment.
 
 To deploy, a github *repository* must be made already, and development files are pushed into.  It can be not necessary to push these changes to the repo.
 
-[Reference](https://medium.com/@aishwaryaparab1/deploying-vite-deploying-vite-app-to-github-pages-166fff40ffd3).
+[This is the full reference to this](https://medium.com/@aishwaryaparab1/deploying-vite-deploying-vite-app-to-github-pages-166fff40ffd3).
 
 - First, on the terminal, install [gh-pages](https://www.npmjs.com/package/gh-pages) as devDependency:
-	`npm i --save-dev gh-pages`
+	```
+	npm i --save-dev gh-pages
+	```
 
 - Second, update *vite.config.js* file.  Add a base-URL (repo-name) as property-value within the **defineConfig({})**:
-	`base: "/{repo-name}/"`
+	```
+	base: "/{repo-name}/"
+	```
 
 - Third, update *package.json* file with a *"homepage"* property:
-	```"homepage": "https://{user-name}/github.io/{repo-name}/"```
+	```
+	"homepage": "https://{user-name}/github.io/{repo-name}/"
+	```
 
 - Fourth, add two *"script"* properties in the *package.json* file. The *'dist'* in the *"deploy"* property-value is the build-output folder:
 	```
@@ -49,8 +55,10 @@ To deploy, a github *repository* must be made already, and development files are
 	}
 	```
 
-- Fifth, deploy the app:
-	`npm run deploy`
+- Fifth, on the terminal, deploy the app:
+	```
+	npm run deploy
+	```
 
 - Last, on your GitHub repository, go **Settings**. Go to **Pages**.  Under **Build and deployment**: set the **Source** to *Deploy from a branch*; set the **Branch** to *gh-pages* and */(root)*. Click **Save**.
 

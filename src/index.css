@@ -20,12 +20,12 @@ body {
 #quote-box {
   display: flex;
   flex-flow: column;
-  gap: 20px;
+  gap: 30px;
 }
-#quote-box > main {
+main {
   display: flex;
   flex-flow: column;
-  gap: 20px;
+  gap: 15px;
 }
 #text > p {
   display: inline;
@@ -155,4 +155,9 @@ body,
 #text,
 #author {
   transition: opacity 0.7s ease-in;
+}
+
+/* FOCUS */
+:focus-visible {
+  outline: none;
 }
