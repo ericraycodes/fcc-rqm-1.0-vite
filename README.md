@@ -90,3 +90,16 @@ Set up [fontawesome with React](https://fontawesome.com/docs/web/use-with/react/
 
 	// Integrate individual icon on JSX
 	<FontAwesomeIcon icon={faEnvelope} />
+
+# Github: pushing to a different branch
+
+	# In the local repo, create a new branch
+	git branch <local-branch-name>
+
+	# Still, locally, switch to that new branch
+	git switch <local-branch-name>
+	# or
+	git checkout <local-branch-name>
+
+	# Push the branch to the remote server
+	git push -u origin <remote-branch-name>

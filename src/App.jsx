@@ -15,8 +15,6 @@ export default function App() {
   // Stores the random color.
   const [color, setColor] = useState('gray');
 
-  // const mainRef = useRef(null);
-
 
   // Handle asynchronous random quote fetching at page load & user event button click.
   useEffect(() => {
